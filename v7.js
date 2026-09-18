@@ -8,5 +8,5 @@
   id.addEventListener('change',applyProfile);reading.addEventListener('change',check);unit.addEventListener('change',check);
   if(analyze){const original=analyze.onclick;analyze.onclick=async function(e){applyProfile();await original?.call(this,e);check()}}
   const save=q('#saveReading');if(save){const original=save.onclick;save.onclick=function(e){const r=api.validate(reading.value,id.value,unit.value);if(id.value&&r.profile.family!=='unknown'&&!r.ok){alert('Lettura non salvata: '+r.reason+'. Controlla cifre, decimali e unità.');return}return original?.call(this,e)}}
-  document.title='Letture contatori V8 TEST';const h=document.querySelector('h1 small');if(h)h.textContent='V8 TEST';const foot=q('.foot');if(foot)foot.textContent='V8 TEST · profili display derivati dal dataset · nessun merge in main.';applyProfile();
+  document.title='Letture contatori V8.1 TEST';const h=document.querySelector('h1 small');if(h)h.textContent='V8.1 TEST';const foot=q('.foot');if(foot)foot.textContent='V8.1 TEST · profili display derivati dal dataset · nessun merge in main.';applyProfile();
 })();
