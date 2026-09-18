@@ -5,13 +5,22 @@ async function decode(f){try{if('createImageBitmap'in window)return await create
 async function load(input){const f=input.files?.[0];if(!f)return;img=await decode(f);fileName=f.name;const s=Math.min(1,2200/img.width);c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);x.drawImage(img,0,0,c.width,c.height);wrap.style.display='block';q('#imageName').value=f.name.replace(/\.[^.]+$/,'');boxes={id:null,reading:null};draw();q('#trainHint').textContent='Modalità ID: disegna il rettangolo sulla targhetta/codice.';input.value=''}
 q('#trainCamera').onchange=e=>load(e.target);q('#trainLibrary').onchange=e=>load(e.target);
 function pos(e){const r=c.getBoundingClientRect();return{x:Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),y:Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))}}
+function hitCanvas(e){const r=c.getBoundingClientRect();return e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom}
+function begin(e){if(!img||!hitCanvas(e))return;e.preventDefault();start=pos(e);live={x:start.x,y:start.y,w:0,h:0};c.setPointerCapture?.(e.pointerId);draw()}
+function move(e){if(!start)return;e.preventDefault();live=box(start,pos(e));draw()}
+function end(e){if(!start)return;e.preventDefault();const b=box(start,pos(e));start=null;live=null;if(b.w>.015&&b.h>.01){boxes[mode]=b;if(mode==='id')setMode('reading')}draw()}
 function box(a,b){return{x:Math.min(a.x,b.x),y:Math.min(a.y,b.y),w:Math.abs(a.x-b.x),h:Math.abs(a.y-b.y)}}
 function css(el,b){if(!b){el.style.display='none';return}el.style.display='block';el.style.left=b.x*100+'%';el.style.top=b.y*100+'%';el.style.width=b.w*100+'%';el.style.height=b.h*100+'%'}
 function crop(b,out){if(!b||!img)return out.width=out.height=1;const sx=Math.round(b.x*c.width),sy=Math.round(b.y*c.height),sw=Math.max(1,Math.round(b.w*c.width)),sh=Math.max(1,Math.round(b.h*c.height));out.width=sw;out.height=sh;out.getContext('2d').drawImage(c,sx,sy,sw,sh,0,0,sw,sh)}
 function draw(){css(q('#boxId'),boxes.id);css(q('#boxReading'),boxes.reading);css(q('#trainSelection'),live);crop(boxes.id,q('#idCrop'));crop(boxes.reading,q('#readingCrop'))}
 function setMode(m){mode=m;q('#modeId').className=m==='id'?'':'secondary';q('#modeReading').className=m==='reading'?'':'secondary';q('#trainHint').textContent=m==='id'?'Disegna il rettangolo intorno al solo ID del contatore.':'Disegna il rettangolo intorno alle sole cifre/unità della lettura.'}
 q('#modeId').onclick=()=>setMode('id');q('#modeReading').onclick=()=>setMode('reading');
-wrap.onpointerdown=e=>{if(!img)return;e.preventDefault();start=pos(e);live={x:start.x,y:start.y,w:0,h:0};wrap.setPointerCapture?.(e.pointerId);draw()};wrap.onpointermove=e=>{if(!start)return;e.preventDefault();live=box(start,pos(e));draw()};wrap.onpointerup=e=>{if(!start)return;e.preventDefault();const b=box(start,pos(e));start=null;live=null;if(b.w>.015&&b.h>.01){boxes[mode]=b;if(mode==='id')setMode('reading')}draw()};
+/* Gli overlay ROI sono sopra il canvas: gli eventi vanno agganciati al canvas e al contenitore
+   in capture, così mouse/pen funzionano anche quando il puntatore attraversa un overlay. */
+wrap.addEventListener('pointerdown',begin,true);
+wrap.addEventListener('pointermove',move,true);
+wrap.addEventListener('pointerup',end,true);
+wrap.addEventListener('pointercancel',e=>{start=null;live=null;draw()},true);
 q('#resetAnnotation').onclick=()=>{boxes={id:null,reading:null};draw();setMode('id')};
 q('#saveAnnotation').onclick=()=>{const id=q('#truthId').value.trim().toUpperCase(),reading=q('#truthReading').value.trim().replace(',','.');if(!img||!boxes.id||!boxes.reading)return alert('Servono foto, ROI ID e ROI LETTURA.');if(!id||!reading)return alert('Inserisci ID e lettura corretti: sono la ground truth del training.');const name=q('#imageName').value.trim()||fileName||('foto-'+Date.now());const a=data(),rec={version:1,image:name,sourceFile:fileName,createdAt:new Date().toISOString(),imageSize:{width:c.width,height:c.height},truth:{id,reading},roi:{id:boxes.id,reading:boxes.reading}};const i=a.findIndex(v=>v.image===name);if(i>=0)a[i]=rec;else a.push(rec);put(a);q('#trainStatus').textContent='Annotazione salvata: '+name+' · '+id+' · '+reading;};
 function fmt(b){return b?['x','y','w','h'].map(k=>b[k].toFixed(3)).join(', '):'-'}function esc(s){return String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
