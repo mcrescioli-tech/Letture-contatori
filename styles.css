@@ -2,3 +2,6 @@
 
 /* V5.0 guided acquisition */
 .resultBox{font-size:1.1rem;font-weight:750;padding:12px;border-radius:10px;background:#eef2ff;margin:10px 0}.notice{padding:11px 12px;border-radius:10px;margin:10px 0;border:1px solid transparent}.notice.ok{background:#ecfdf5;color:#166534;border-color:#86efac}.notice.warning{background:#fff7ed;color:#9a3412;border-color:#fdba74}.notice.neutral{background:#f3f4f6;color:#4b5563;border-color:#d1d5db}small{font-size:.55em;color:#6b7280}details{margin-top:12px}
+
+/* V5.1 three-stage selection */
+.roiBox{display:none;position:absolute;pointer-events:none}.meterRoi{border:3px solid #2563eb;background:#2563eb14}.idRoi{border:3px solid #f59e0b;background:#f59e0b22}.previewGrid{display:none;grid-template-columns:1fr 1fr 1fr;gap:8px}.previewGrid>div{border:1px solid #d1d5db;border-radius:9px;padding:7px;background:#f9fafb}.previewGrid canvas{display:block;width:100%;height:110px;object-fit:contain;background:#111;margin-top:6px;border-radius:6px}.modeRow button{font-size:.88rem;padding:10px}@media(max-width:600px){.previewGrid{grid-template-columns:1fr}.modeRow{display:grid;grid-template-columns:1fr}.modeRow button{width:100%}}
