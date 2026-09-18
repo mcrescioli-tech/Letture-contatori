@@ -1,10 +1,12 @@
-# Test V4
+# Test V8.3
 
-1. Scatta o scegli la foto del contatore.
-2. Traccia con il dito un rettangolo stretto intorno al solo display LCD, includendo le cifre e possibilmente la scritta kWh.
-3. Premi **Analizza display selezionato**.
-4. Verifica codice e lettura prima di salvare.
+1. Seleziona dall'elenco l'ID del contatore: è il riferimento principale; il riconoscimento della targhetta è solo un controllo ausiliario.
+2. Scatta o scegli la foto.
+3. Seleziona con il dito un rettangolo stretto intorno alla sola riga numerica del display, includendo il separatore decimale.
+4. Verifica che il profilo caricato riporti cifre, decimali e unità attesi.
+5. Premi **Leggi il display**, confronta i candidati con il display e conferma manualmente la lettura prima del salvataggio.
+
+Il test deve coprire tutti i 19 campioni in `dataset/ground-truth.json`, non solo QKL8.
+Per ciascun errore, conserva la schermata **Diagnostica OCR**, il candidato proposto, quello corretto e il ritaglio display. Non usare il risultato OCR come correzione automatica.
 
 Caso di riferimento: QKL8, lettura attesa dalla foto di test: 940703.3 kWh.
-
-Se l'OCR fallisce, aprire **Diagnostica OCR** e conservare A/B/C e candidati.
