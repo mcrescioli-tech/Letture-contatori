@@ -3,7 +3,7 @@ name: Pages production and preview
 on:
   push:
     branches: [main]
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, reopened, closed]
   workflow_dispatch:
 
@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   build:
-    if: github.event_name != 'pull_request' || github.event.action != 'closed'
+    if: github.event_name != 'pull_request_target' || github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout production
@@ -27,13 +27,13 @@ jobs:
           ref: main
           path: site
       - name: Checkout preview PR
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request_target'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           path: preview-src
       - name: Add current PR preview
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request_target'
         run: |
           mkdir -p site/test
           rsync -a --delete --exclude='.git' --exclude='.github' preview-src/ site/test/
@@ -46,7 +46,7 @@ jobs:
         with:
           path: site
   deploy:
-    if: github.event_name != 'pull_request' || github.event.action != 'closed'
+    if: github.event_name != 'pull_request_target' || github.event.action != 'closed'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
