@@ -6,12 +6,12 @@
 <meta name="theme-color" content="#111827">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="styles.css">
-<title>Letture contatori V5.4 TEST</title>
+<title>Letture contatori V6.0 TEST</title>
 </head>
 <body>
 <main>
 <header>
-<h1>Letture contatori <small>V5.4 TEST</small></h1>
+<h1>Letture contatori <small>V6.0 TEST</small></h1>
 <p>Acquisizione guidata del display con verifica operatore.</p>
 </header>
 
@@ -44,6 +44,11 @@
 </div>
 <div id="idCheck" class="notice neutral">Controllo ID non ancora eseguito.</div>
 <div class="row">
+<label>Numero cifre<select id="digitCount"><option>4</option><option>5</option><option>6</option><option>7</option><option selected>8</option><option>9</option><option>10</option></select></label>
+<label>Decimali<select id="decimalPlaces"><option>0</option><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label>
+</div>
+<div id="localModelStatus" class="notice neutral">Modello locale: nessun campione.</div>
+<div class="row">
 <button id="analyze" disabled>Controlla ID e leggi display</button>
 <button id="resetCrop" class="secondary" disabled>Rifai selezione</button>
 </div>
@@ -73,13 +78,14 @@
 
 <section class="card">
 <div class="row spread"><h2>Letture acquisite</h2><button id="csv" class="secondary">Esporta CSV</button></div>
+<div class="row"><button id="exportModel" class="secondary">Esporta modello locale</button><label class="photoBtn secondary">Importa modello<input id="importModel" type="file" accept="application/json,.json"></label><button id="resetModel" class="danger">Azzera modello</button></div>
 <p class="muted">Il CSV contiene il valore originale e quello normalizzato in MWh per il successivo popolamento dello storico.</p>
 <div class="tableWrap"><table><thead><tr><th>Data</th><th>ID</th><th>Lettura</th><th>MWh</th><th>Esito</th><th></th></tr></thead><tbody id="history"></tbody></table></div>
 </section>
 
-<p class="foot">V5.4 TEST · flusso ibrido · nessun merge in main.</p>
+<p class="foot">V6.0 TEST · flusso ibrido · nessun merge in main.</p>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-<script src="training.js?v=5.4"></script>
+<script src="training.js?v=6.0"></script>
 </body>
 </html>
