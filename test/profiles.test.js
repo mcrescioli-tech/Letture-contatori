@@ -4,5 +4,5 @@ assert.equal(p.validate('5213.99','QCPA1','MWh').ok,true);
 assert.equal(p.validate('5213.99','QCPA1','kWh').ok,false);
 assert.equal(p.validate('02997093','QKR1','kWh').ok,true);
 assert.equal(p.validate('3956626.2','QCPA5','kWh').ok,true);
-assert.equal(p.validate('200539.5','QCPA4','kWh').ok,true);
+assert.equal(p.validate('0200539.5','QCPA4','kWh').ok,true);
 console.log('profile tests: ok');
