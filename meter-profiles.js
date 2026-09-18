@@ -14,7 +14,7 @@
     QKL1:['nemoText',7,1,'kWh'],QKL5:['nemoText',8,2,'kWh'],QKL8:['nemoText',7,1,'kWh'],
     QKL13:['nemo96',7,1,'kWh'],QKR1:['nemo96',8,0,'kWh'],QKR2:['nemo96',8,0,'kWh'],
     QCPA1:['vipd3',6,2,'MWh'],QCPA2:['vipd3',6,2,'MWh'],QCPA3:['nemoD4',5,1,'kWh'],
-    QCPA4:['contoD4',7,1,'kWh'],QCPA5:['contoD4',8,1,'kWh']
+    QCPA4:['contoD4',8,1,'kWh'],QCPA5:['contoD4',8,1,'kWh']
   };
   function profile(id){const row=P[id];if(!row)return{id,family:'unknown',...FAMILIES.unknown,digits:null,decimals:null,unit:null};const [family,digits,decimals,unit]=row;return{id,family,...FAMILIES[family],digits,decimals,unit}}
   function normalize(raw,p){let s=String(raw??'').trim().replace(/\s/g,'').replace(',','.').replace(/[Oo]/g,'0');if(!/^\d+(?:\.\d+)?$/.test(s))return{ok:false,value:null,reason:'Formato non numerico'};let [a,b='']=s.split('.');if(!s.includes('.')&&p.decimals>0&&a.length===p.digits){b=a.slice(-p.decimals);a=a.slice(0,-p.decimals)}if(b.length!==p.decimals)return{ok:false,value:null,reason:'Attesi '+p.decimals+' decimali'};const total=a.length+b.length;if(p.digits&&total!==p.digits)return{ok:false,value:null,reason:'Attese '+p.digits+' cifre, trovate '+total};return{ok:true,value:p.decimals?a+'.'+b:a,reason:'Formato compatibile'}}
