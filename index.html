@@ -6,12 +6,12 @@
 <meta name="theme-color" content="#111827">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="styles.css">
-<title>Letture contatori V6.0 TEST</title>
+<title>Letture contatori V6.1 TEST</title>
 </head>
 <body>
 <main>
 <header>
-<h1>Letture contatori <small>V6.0 TEST</small></h1>
+<h1>Letture contatori <small>V6.1 TEST</small></h1>
 <p>Acquisizione guidata del display con verifica operatore.</p>
 </header>
 
@@ -25,31 +25,23 @@
 
 <section class="card">
 <h2>2. Fotografa e seleziona il display</h2>
-<p class="muted">Inquadra frontalmente il contatore, poi delimita in sequenza l’intero apparecchio, la targhetta ID e il display.</p>
+<p class="muted">L’app cerca automaticamente l’ID nella fotografia e lo confronta con l’elenco Excel. Trascina il rettangolo soltanto sulle cifre del display, includendo il separatore decimale.</p>
 <div class="row">
 <label class="photoBtn">Scatta foto<input id="cameraPhoto" type="file" accept="image/*" capture="environment"></label>
 <label class="photoBtn">Scegli foto<input id="libraryPhoto" type="file" accept="image/*"></label>
 </div>
-<div class="row modeRow">
-<button id="modeMeter">1 · Area contatore</button>
-<button id="modeId" class="secondary">2 · Area ID</button>
-<button id="modeDisplay" class="secondary">3 · Area display</button>
-</div>
-<div id="cropWrap"><canvas id="preview"></canvas><div id="meterBox" class="roiBox meterRoi"></div><div id="idBox" class="roiBox idRoi"></div><div id="selection"></div></div>
+<div id="idCheck" class="notice neutral">Riconoscimento automatico ID non ancora eseguito.</div>
+<button id="detectId" class="secondary" disabled>Riprova riconoscimento ID</button>
+<div id="cropWrap"><canvas id="preview"></canvas><div id="selection"></div></div>
 <div id="cropHint" class="muted">Carica una foto per iniziare.</div>
-<div id="cropCheck" class="previewGrid">
-<div><strong>Contatore</strong><canvas id="meterPreview"></canvas></div>
-<div><strong>ID</strong><canvas id="idPreview"></canvas></div>
-<div><strong>Display</strong><canvas id="cropPreview"></canvas></div>
-</div>
-<div id="idCheck" class="notice neutral">Controllo ID non ancora eseguito.</div>
+<div id="cropCheck"><strong>Display selezionato</strong><canvas id="cropPreview"></canvas></div>
 <div class="row">
 <label>Numero cifre<select id="digitCount"><option>4</option><option>5</option><option>6</option><option>7</option><option selected>8</option><option>9</option><option>10</option></select></label>
 <label>Decimali<select id="decimalPlaces"><option>0</option><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label>
 </div>
 <div id="localModelStatus" class="notice neutral">Modello locale: nessun campione.</div>
 <div class="row">
-<button id="analyze" disabled>Controlla ID e leggi display</button>
+<button id="analyze" disabled>Leggi il display</button>
 <button id="resetCrop" class="secondary" disabled>Rifai selezione</button>
 </div>
 <div id="progress" class="muted"></div>
@@ -83,9 +75,9 @@
 <div class="tableWrap"><table><thead><tr><th>Data</th><th>ID</th><th>Lettura</th><th>MWh</th><th>Esito</th><th></th></tr></thead><tbody id="history"></tbody></table></div>
 </section>
 
-<p class="foot">V6.0 TEST · flusso ibrido · nessun merge in main.</p>
+<p class="foot">V6.1 TEST · flusso ibrido · nessun merge in main.</p>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-<script src="training.js?v=6.0"></script>
+<script src="training.js?v=6.1"></script>
 </body>
 </html>
