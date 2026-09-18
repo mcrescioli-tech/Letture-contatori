@@ -1,0 +1,25 @@
+{
+  "schema": "meter-photo-ground-truth-v1",
+  "source": "campioni confermati dall'operatore",
+  "samples": [
+    {"file":"01-AC4-foto1-1-.jpeg","id":"QCPA4","reading":"0200539.5","unit":"kWh","family":"contoD4"},
+    {"file":"02-QKR1-foto1.jpeg","id":"QKR1","reading":"02997093","unit":"kWh","family":"nemo96"},
+    {"file":"03-QKL1-foto1.jpeg","id":"QKL1","reading":"203376.6","unit":"kWh","family":"nemoText"},
+    {"file":"04-AC5-foto1-1-.jpeg","id":"QCPA5","reading":"3956626.2","unit":"kWh","family":"contoD4"},
+    {"file":"05-AC1-foto1-1-.jpeg","id":"QCPA1","reading":"5213.99","unit":"MWh","family":"vipd3"},
+    {"file":"06-QK7-2-foto1.jpeg","id":"QK7/2","reading":"767471.22","unit":"kWh","family":"nemo144"},
+    {"file":"07-QKL13-foto1.jpeg","id":"QKL13","reading":"690317.8","unit":"kWh","family":"nemo96"},
+    {"file":"08-YORK-1-foto-1.jpeg","id":"YORK1","reading":null,"unit":null,"family":"unknown","status":"unlabeled"},
+    {"file":"09-QKL8-foto-1.jpg","id":"QKL8","reading":"940703.3","unit":"kWh","family":"nemoText"},
+    {"file":"10-QK7-3-foto1.jpeg","id":"QK7/3","reading":"240053.09","unit":"kWh","family":"nemo144"},
+    {"file":"11-QL7-3-foto1.jpeg","id":"QL7/3","reading":"656545.20","unit":"kWh","family":"nemo144"},
+    {"file":"12-QKL5-foto1-1-.jpeg","id":"QKL5","reading":"514722.46","unit":"kWh","family":"nemoText"},
+    {"file":"13-QKR2-foto1.jpeg","id":"QKR2","reading":"02065578","unit":"kWh","family":"nemo96"},
+    {"file":"14-QL7-1-foto1.jpeg","id":"QL7/1","reading":"153479.26","unit":"kWh","family":"nemo144"},
+    {"file":"15-AC2-foto1-1-.jpeg","id":"QCPA2","reading":"5424.92","unit":"MWh","family":"vipd3"},
+    {"file":"16-AC3-foto1-1-.jpeg","id":"QCPA3","reading":"3114.7","unit":"kWh","family":"nemoD4"},
+    {"file":"17-QL7-2-foto1-1-.jpeg","id":"QL7/2","reading":"283429.53","unit":"kWh","family":"nemo144"},
+    {"file":"18-QK7-3-foto1-1-.jpeg","id":"QK7/3","reading":"240053.09","unit":"kWh","family":"nemo144"},
+    {"file":"19-QK7-1-foto1-1-.jpeg","id":"QK7/1","reading":"776344.80","unit":"kWh","family":"nemo144"}
+  ]
+}
